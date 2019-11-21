@@ -17,7 +17,7 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 before_install:
-  - psql -c 'create database travis_ci_test;' -U postgres;'
+  - psql -c 'create database travis_ci_test;' -U postgres
 install:
   - npm install
 script:
