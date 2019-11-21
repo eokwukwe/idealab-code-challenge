@@ -1,21 +1,17 @@
 import bcrypt from 'bcryptjs';
-import authentication from '../../middlewares/authentication'
+import authentication from '../../middlewares/authentication';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
     {
       id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      lastName: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false
       },
@@ -25,11 +21,11 @@ export default (sequelize, DataTypes) => {
         unique: true
       },
       password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       isVerified: {
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         defaultValue: false
       }
     },

@@ -3,7 +3,7 @@ export default (sequelize, DataTypes) => {
     'RolePermission',
     {
       permissionId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: {
           model: 'User',
           key: 'id',
@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
         }
       },
       roleId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: {
           model: 'Role',
           key: 'id',

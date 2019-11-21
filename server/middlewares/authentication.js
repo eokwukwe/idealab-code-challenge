@@ -5,19 +5,18 @@ import http from '../helpers/http';
 
 dotenv.config();
 
+const { JWT_SECRET } = process.env;
+
 export default {
-  /**
-   * @description Generate a token for the user
-   *  The token expires in 24 hours
-   * @param {number} customer_id The id of the customer
-   * @returns {string} token
-   * @mwmber Authentication
-   */
   generateToken(userId) {
-    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '24hr' });
+    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '24hr' });
   },
 
-  async verifyToken(req, res, next) {
+  async verifyToken(token) {
+    return jwt.verify(token, JWT_SECRET);
+  },
+
+  async authenticate(req, res, next) {
     const { authorization } = req.headers;
     const options = {
       errorCode: 'AUT_01',
@@ -29,7 +28,7 @@ export default {
         return http.httpErrorResponse(res, options, 401);
       }
       const token = authorization.split(' ')[1];
-      req.user = await jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await this.verifyToken(token);
       return next();
     } catch (error) {
       // eslint-disable-next-line no-console

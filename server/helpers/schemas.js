@@ -1,16 +1,10 @@
 import Joi from '@hapi/joi';
 
-const firstName = Joi.string()
+const name = Joi.string()
   .required()
   .min(2)
   .trim()
   .label('first name');
-
-const lastName = Joi.string()
-  .required()
-  .min(2)
-  .trim()
-  .label('last name');
 
 const email = Joi.string()
   .email()
@@ -26,8 +20,7 @@ const password = Joi.string()
   .label('Password');
 
 const signUpSchema = Joi.object().keys({
-  firstName,
-  lastName,
+  name,
   email,
   password
 });

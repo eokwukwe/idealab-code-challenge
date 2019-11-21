@@ -1,11 +1,13 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
+import emailTemplate from './emailTemplate';
+
 dotenv.config();
 const { EMAIL_NAME, EMAIL_PASS } = process.env;
 const isTest = process.env.NODE_ENV === 'test';
 
-const sendEmail = async (to, subject, message) => {
+const sendEmail = async (to, subject, url) => {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -17,7 +19,7 @@ const sendEmail = async (to, subject, message) => {
     from: 'IdeaLab Technologies',
     to,
     subject,
-    html: message
+    html: emailTemplate(url)
   };
 
   const mail = isTest ? Promise.resolve('Email sent') : await transporter.sendMail(mailOptions);

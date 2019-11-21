@@ -1,10 +1,9 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const GroupRole = sequelize.define(
     'GroupRole',
     {
       roleId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: {
           model: 'Role',
           key: 'id',
@@ -12,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       groupId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         references: {
           model: 'Group',
           key: 'id',

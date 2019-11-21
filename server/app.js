@@ -4,7 +4,7 @@ import log from 'fancy-log';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import mainAppRouter from './routes'
+import mainAppRouter from './routes';
 
 dotenv.config();
 const app = express();
@@ -16,7 +16,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use('/api/v1', mainAppRouter);
+app.use('/v1', mainAppRouter);
 app.get('/', (req, res) => {
   res.send(
     `<h1>Welcome to IdeaLab API</h1>
@@ -40,8 +40,8 @@ app.use((error, req, res, next) => {
   }
   return res.status(error.status || 500).json({
     error: {
-      message: error.message,
-    },
+      message: error.message
+    }
   });
 });
 

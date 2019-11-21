@@ -44,8 +44,7 @@ export default class UserService extends BaseService {
       user: {
         schema: userData.getSafeDataValues()
       },
-      accessToken: `Bearer ${userData.generateToken()}`,
-      expires_in: '24h'
+      access_token: `Bearer ${userData.generateToken()}`
     };
   }
 }
