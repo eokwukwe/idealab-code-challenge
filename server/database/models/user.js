@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
     {
@@ -35,6 +34,16 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = function(models) {
     // associations can be defined here
+    User.belongsToMany(models.Role, {
+      as: 'UserTasks',
+      through: 'UserRoles',
+      foreignKey: 'userId'
+    });
+    User.belongsToMany(models.Group, {
+      as: 'MemberOf',
+      through: 'UserGroups',
+      foreignKey: 'userId'
+    });
   };
   return User;
 };
