@@ -45,6 +45,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(port, () => log(`Server is running on http://localhost:${port}`));
+export const server = app.listen(port, () => log(`Server is running on http://localhost:${port}`));
 
 export default app;

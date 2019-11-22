@@ -34,6 +34,17 @@ export default class UserService extends BaseService {
   }
 
   /**
+   * @description This method updates a record in the user's table
+   * @param  {object} option
+   * @returns  {Promise<object>} user
+   * @member UserService
+   */
+  static async updateUser(fields, option) {
+    const updated = await this.update(User, fields, option);
+    return updated;
+  }
+
+  /**
    * @description This service formats user object to be returned to the client
    * @param  {object} userData
    * @returns  {object} formatted user object

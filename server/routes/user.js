@@ -6,5 +6,6 @@ import validateInput from '../middlewares/validateInput';
 const router = Router();
 
 router.post('/user/signup', validateInput, checkEmail, UserController.signup);
+router.post('/confirm', UserController.confirm)
 
 export default router;

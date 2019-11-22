@@ -9,7 +9,7 @@
 		"build": "npm run clean && babel ./server -d dist",
 		"clean": "rm -rf dist",
 		"start:dev": "cross-env NODE_ENV=development nodemon ./server/app.js --exec babel-node",
-		"pretest": "cross-env NODE_ENV=test npm run undo-migrate && npm run migrate",
+		"pretest": "cross-env NODE_ENV=test npm run undo-migrate && cross-env NODE_ENV=test npm run migrate",
 		"test": "jest --no-cache  --detectOpenHandles --runInBand --coverage --colors --forceExit",
 		"migrate": "node_modules/.bin/sequelize db:migrate",
 		"undo-migrate": "node_modules/.bin/sequelize db:migrate:undo:all",

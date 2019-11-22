@@ -24,4 +24,16 @@ export default class BaseService {
       include
     });
   }
+
+  /**
+   * @description This updates a record
+   * @param  {object} model
+   * @param {object} option The condition for the query
+   * @param {object} Fields row to update
+   * @returns {object} one row
+   * @member BaseService
+   */
+  static async update(model, fields, option) {
+    return model.update({ ...fields }, { where: { ...option } });
+  }
 }
