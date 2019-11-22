@@ -1,13 +1,10 @@
 import request from 'supertest';
 
-import app, { server } from '../../app';
+import app from '../../app';
+
 const baseUrl = '/v1/user';
 
 describe('User controller', () => {
-  // afterAll(async done => {
-  //   await server.close();
-  //   done();
-  // });
   afterAll(async () => {
     await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
   });
@@ -55,6 +52,16 @@ describe('User controller', () => {
           email: 'test@test.com',
           password: 'password'
         });
+      expect(response.statusCode).toBe(200);
+    });
+    it('should return auth error if a user makes the request with a token', async () => {
+      const response = await request(app).get(`${baseUrl}/permissions`);
+      expect(response.statusCode).toBe(401);
+    });
+    it('should return array of users permissions', async () => {
+      const response = await request(app)
+        .get(`${baseUrl}/permissions`)
+        .set('authorization', `Bearer ${token}`);
       expect(response.statusCode).toBe(200);
     });
   });

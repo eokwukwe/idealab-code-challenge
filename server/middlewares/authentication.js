@@ -17,22 +17,24 @@ export default {
   },
 
   async authenticate(req, res, next) {
-    const { authorization } = req.headers;
+    const accessToken = req.headers.authorization;
     const options = {
       errorCode: 'AUT_01',
       message: 'Access Unauthorized',
       field: 'accessToken'
     };
     try {
-      if (typeof authorization === 'undefined') {
+      if (typeof accessToken === 'undefined') {
         return http.httpErrorResponse(res, options, 401);
       }
-      const token = authorization.split(' ')[1];
-      req.user = await this.verifyToken(token);
+      const token = accessToken.split(' ')[1];
+      const decoded = await jwt.verify(token, JWT_SECRET);
+      if (!decoded) {
+        return http.httpErrorResponse(res, options, 401);
+      }
+      req.user = decoded;
       return next();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
       return http.httpErrorResponse(res, options, 401);
     }
   }

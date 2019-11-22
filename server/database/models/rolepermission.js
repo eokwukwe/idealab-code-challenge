@@ -5,9 +5,9 @@ export default (sequelize, DataTypes) => {
       permissionId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'User',
+          model: 'Permission',
           key: 'id',
-          as: 'userId'
+          as: 'permissionId'
         }
       },
       roleId: {

@@ -13,9 +13,10 @@
 		"test": "jest --no-cache  --detectOpenHandles --runInBand --coverage --colors --forceExit",
 		"migrate": "node_modules/.bin/sequelize db:migrate",
 		"undo-migrate": "node_modules/.bin/sequelize db:migrate:undo:all",
-		"seed": "node_modules/.bin/sequelize db:seed:all",
+		"seed": "node_modules/.bin/sequelize db:seed:all --debug",
 		"undo-seed": "node_modules/.bin/sequelize db:seed:undo:all",
-		"drop-db": "node_modules/.bin/sequelize db:drop"
+		"drop-db": "node_modules/.bin/sequelize db:drop",
+		"raw": "cross-env NODE_ENV=development babel-node ./server/helpers/query.js"
 	},
 	"keywords": [
 		"nodejs",

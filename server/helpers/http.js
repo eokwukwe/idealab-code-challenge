@@ -21,7 +21,7 @@ export default {
    * @return {object} server reponse
    */
   httpCollectionRecordResponse(res, data) {
-    return res.status(200).json([...data]);
+    return res.status(200).json({ ...data });
   },
 
   /**
