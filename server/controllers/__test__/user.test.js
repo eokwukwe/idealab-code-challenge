@@ -33,9 +33,29 @@ describe('User controller', () => {
       expect(response.statusCode).toBe(201);
     });
 
+    it('should not login a user with unconfirmed account', async () => {
+      const response = await request(app)
+        .post(`${baseUrl}/auth`)
+        .send({
+          email: 'test@test.com',
+          password: 'password'
+        });
+      expect(response.statusCode).toBe(401);
+    });
+
     it('should confirm the user account', async () => {
       const resp = await request(app).post(`/v1/confirm?token=${token}`);
       expect(resp.statusCode).toBe(200);
+    });
+
+    it('should login a user with confirmed account', async () => {
+      const response = await request(app)
+        .post(`${baseUrl}/auth`)
+        .send({
+          email: 'test@test.com',
+          password: 'password'
+        });
+      expect(response.statusCode).toBe(200);
     });
   });
 });

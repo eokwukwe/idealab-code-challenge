@@ -49,7 +49,9 @@ export default class UserController {
       const { userId } = await authentication.verifyToken(token);
       const checkUser = await UserService.getUser({ id: userId });
       if (isEmpty(checkUser)) {
-        return http.httpErrorResponse(res, { message: 'User not found or invalid token' });
+        return http.httpErrorResponse(res, {
+          message: 'User not found or invalid token'
+        });
       }
       await UserService.updateUser({ isVerified: true }, { id: checkUser.id });
       return http.httpSingleRecordResponse(
@@ -57,6 +59,36 @@ export default class UserController {
         { message: 'Account confirmed. You can now log in' },
         200
       );
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  /**
+   * @method signup
+   * @description Method for user registration
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} response body object
+   */
+  static async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      const user = await UserService.getUser({ email });
+      const options = {
+        errorCode: 'USR_01',
+        field: 'email/password',
+        message: 'Email or Password is invalid.'
+      };
+      if (!isEmpty(user)) {
+        const validatePassword = await user.validatePassword(password);
+        if (validatePassword) {
+          const userSafeData = UserService.getSafeDataValues(user);
+          return http.httpSingleRecordResponse(res, userSafeData, 200);
+        }
+        return http.httpErrorResponse(res, options, 400);
+      }
+      return http.httpErrorResponse(res, options, 400);
     } catch (error) {
       return next(error);
     }
