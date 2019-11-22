@@ -6,6 +6,8 @@
 - Clone the repo
 - Setup `.env` as indicated in the `.env.example` file
 - Run `yarn install | npm install`
+- Run `yarn run migrate | npm run migrate` to create the tables
+- Run `yarn run seed | npm run seed` to seed the database
 - Run `yarn run start:dev | npm run start:dev` to start the dev server
 - The server will start at `localhost:4040`
 - For test, run `yarn test | npm test`
