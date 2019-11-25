@@ -5,8 +5,7 @@ import http from '../helpers/http';
 const { User } = models;
 
 /**
- * @description This function checks the customer table to confirm
- * if an email already exits in the table
+ * @description This middleware function checks if a registered user has confirmed his email
  * @param  {object} req HTTP request object
  * @param  {object} res HTTP rewpone object
  * @param  {function} next
