@@ -37,8 +37,8 @@ export default class UserController {
   }
 
   /**
-   * @method signup
-   * @description Method for user registration
+   * @method confirm
+   * @description Method for confirming user email
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
    * @returns {object} response body object
@@ -65,8 +65,8 @@ export default class UserController {
   }
 
   /**
-   * @method signup
-   * @description Method for user registration
+   * @method login
+   * @description Method for user login
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
    * @returns {object} response body object
